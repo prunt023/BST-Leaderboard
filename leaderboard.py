@@ -114,3 +114,25 @@ class Leaderboard:
             result.append(node.player)
         self.reverse_inOrder(node.left, result, k)      # Traverse through left subtree to fill k players if necessary
 
+
+   def range_of_players(self, tree, low, high):
+        # Return all players within a given range 
+        result = []
+
+        def in_between(node):
+            # Recursive helper for traversal through subtrees
+            if node == None:
+                return
+            
+            if low < node.key:                  # Iterate left subtree till reaching the given low
+                in_between(node.left)
+
+            if low <= node.key <= high:         # Add all players in between given low and high values
+                result.append(node.player)
+
+            if high > node.key:
+                in_between(node.right)          # Search right subtree for values that are <= high 
+
+        in_between(tree.root)                   # Start at root
+
+        return result
