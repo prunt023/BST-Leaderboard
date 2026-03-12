@@ -79,3 +79,38 @@ class Leaderboard:
         self.stl_tree.insert(stl, player)
         self.blk_tree.insert(blk, player)
 
+    
+    def display_all_categories(self,  k):
+        # Sets up display for player ranking in each category
+
+        categories = [  
+            ("Points", self.pts_tree),                       # Pair each tree with a statistic
+            ("Assists", self.ast_tree),
+            ("Rebounds", self.reb_tree),
+            ("Steals", self.stl_tree),
+            ("Blocks", self.blk_tree)
+        ]
+
+        for name, tree in categories:
+            # Iteration through each category
+            result = []
+            self.reverse_inOrder(tree.root, result, k)      # Reverse order of traversal so largest values come first
+            print(f"Top {k} {name}:")
+
+            for player in result:
+                stat = getattr(player, name.lower())        # Print every player name and accompanying stat for each category
+                print(f"{player.name}: {stat}")
+            print("-" * 20)
+
+
+    def reverse_inOrder(self, node, result, k):
+        # Reverses order of traversal through each tree, making largest values appear first
+
+        if node == None or len(result) >= k:            # Stop if node is empty or k amount of players has been reached
+            return
+        
+        self.reverse_inOrder(node.right, result, k)     # Traverse through right (larger) subtree first
+        if len(result) < k:
+            result.append(node.player)
+        self.reverse_inOrder(node.left, result, k)      # Traverse through left subtree to fill k players if necessary
+
