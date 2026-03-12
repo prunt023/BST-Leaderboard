@@ -136,3 +136,109 @@ class Leaderboard:
         in_between(tree.root)                   # Start at root
 
         return result
+
+
+    def get_tree_by_stat(self, stat):
+        # Helper for range_of_players to select the correct stat tree
+        stat = stat.lower()
+
+        if stat == "points":
+            return self.pts_tree
+        elif stat == "assists":
+            return self.ast_tree
+        elif stat == "rebounds":
+            return self.reb_tree
+        elif stat == "steals":
+            return self.stl_tree
+        elif stat == "blocks":
+            return self.blk_tree
+        else:
+            return None
+
+
+# Main Interaction Hub
+
+if __name__ == "__main__":
+
+    lb = Leaderboard()
+
+
+for name, pts, ast, reb, stl, blk in given_players:
+        lb.add_player(name, pts, ast, reb, stl, blk)
+
+    def check_int(question):
+            # Ensures that given input is an integer
+
+            while True:
+                k_input = input(question)
+
+                try:
+                    return int(k_input)
+                
+                except ValueError:
+                    print("Please try again: ")
+
+
+    while True:
+        # Program loop
+
+        print("\n ====== Leaderboard Menu ======")
+        print("1. Add Player")
+        print("2. Show Leaderboard")
+        print("3. Select Stat Range")
+        print("4. Delete player")
+        print("5. Exit Leaderboard")
+
+        option = input("\n Please select any option: ")
+
+        if option == "1":
+            # Add a player to the leaderboard
+            name = input("\n What's your players name?: ")
+            pts = check_int("Points: ")
+            ast = check_int("Asists: ")
+            reb = check_int("Rebounds: ")
+            stl = check_int("Steals: ")
+            blk = check_int("Blocks: ")
+
+            lb.add_player(name, pts, ast, reb, stl, blk)
+
+
+        elif option == "2": 
+            # Display current leaderboard
+            k = check_int("\n How many of the top players would you like to see?: ")
+            print(f"\n Here are the top {k} players in each category:")
+            lb.display_all_categories(k)
+
+
+        elif option == "3":
+            # Range of players in a specific stat
+            stat = input("\n Please select a statistic (Points, Assists, Rebounds, Steals, Blocks): ").lower()
+            
+            tree = lb.get_tree_by_stat(stat)
+
+            # Checks that given tree input is valid
+            if tree == None:
+                stat = input("Please try again: (points, assists, rebounds, steals, blocks) ")
+                tree = lb.get_tree_by_stat(stat)
+            
+            low = check_int("Minimum value: ")
+            high = check_int("Maximum value: ")
+
+            # Flip low and high if low > high
+            if low > high:
+                tmp = high
+                high = low
+                low = tmp
+
+            players = lb.range_of_players(tree, low, high)
+            print(f"\n Players with {stat} between {low} and {high}: ")
+
+            # Print players in the given range
+            for p in players:
+                player_stat = getattr(p, stat)
+                print(f" {p.name}: {player_stat}:")
+
+        elif option == "4":
+            # Exit program 
+            print("\n Exiting Leaderboard...")
+            break 
