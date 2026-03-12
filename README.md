@@ -49,7 +49,7 @@ min_value_node:	Finds a successor node after deletion
 Leaderboard Class:
 	This class manages all stat trees and a dictionary for player lookup when deleting.
 
-	Contains trees: 
+Contains trees:
 points tree
 assists tree
 rebounds tree
