@@ -39,7 +39,7 @@ right = right child node
 BST Class:
 	This class handles all operations done on a Binary Search Tree
 insert:		Insert a player into tree
-inserter: 	A helper function recursively designed to add leaf nodes        after root node (player) is inserted
+inserter: 	A helper function recursively designed to add leaf nodes after root node (player) is inserted
 
 delete: 	Remove a player from tree
 deleter: 	A helper function designed to reassign nodes after a node is deleted
