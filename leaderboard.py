@@ -240,7 +240,20 @@ if __name__ == "__main__":
 
     lb = Leaderboard()
 
-
+# Load 10 default players immediately
+    given_players = [
+        ("LeBron James", 26, 5, 8, 1, 2),
+        ("Anthony Edwards", 38, 5, 7, 3, 4), 
+        ("Stephen Curry", 27, 6, 2, 2, 1),
+        ("Shai Gilgeous-Alexander", 30, 4, 3, 1, 2),
+        ("Victor Wembanyama", 26, 3, 10, 1, 7),
+        ("Giannis Antetokounmpo", 31, 6, 11, 1, 2),
+        ("Luka Doncic", 29, 9, 8, 1, 0),
+        ("Joel Embiid", 34, 4, 10, 1, 2),
+        ("Kevin Durant", 24, 6, 7, 3, 5),
+        ("Nikola Jokic", 34, 8, 10, 2, 5)
+    ]
+    
 for name, pts, ast, reb, stl, blk in given_players:
         lb.add_player(name, pts, ast, reb, stl, blk)
 
@@ -324,4 +337,8 @@ for name, pts, ast, reb, stl, blk in given_players:
         elif option == "5":
             # Exit program 
             print("\n Exiting Leaderboard...")
-            break 
+            break
+
+        else:
+            # Option not in menu
+            option = input("Not an option. Please try again: ")
