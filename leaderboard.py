@@ -51,6 +51,63 @@ class BST:
                 self.inserter(node.right, key, player)  # Continue through the newly added right node
 
 
+    def delete(self, key, player):
+        self.root = self.deleter(self.root, key, player)            # Ensures root node is reassigned if root is being deleted
+
+
+    def deleter(self, node, key, player):
+        # helper for delete
+        # Checks child nodes and reassigns after deletion if necessary
+
+        if Node == None:
+            return None
+        
+        # Moves through left and right subtrees
+        if key < node.key:
+            node.left = self.deleter(node.left, key, player)       
+        
+        elif key > node.key:
+            node.right = self.deleter(node.right, key, player)
+        
+        else:
+        # Check that player selected is actually the player intended to delete
+            if node.player != player:
+                node.right = self.deleter(node.right, key, player)
+                return node
+            
+            # 1st Option: Deleted node has no child (leaf) nodes
+            if node.left == None and node.right == None:
+                return None
+            
+            # 2nd Option: 1 child node
+            if node.left == None:
+                return node.right                                               # If child node is to the right
+            
+            if node.right == None:                                              # If child node is to the left
+                return node.left
+            
+            # 3rd Option: Both child nodes
+            succ = self.min_value_node(node.right)
+            
+            node.key = succ.key                                                 # Replace current node with successor's data
+            node.player = succ.player
+
+            node.right = self.deleter(node.right, succ.key, succ.player)        # Delete successor node
+        return node
+    
+
+    def min_value_node(self, node):
+        # Helper function for deleter
+        # Finds the smallest value in a subtree
+
+        current = node
+
+        while current.left != None:                                             # Traverse through subtree until smallest value is found
+            current = current.left
+
+        return current
+
+    
 class Leaderboard:
     # Manages all players and each statistic category
 
