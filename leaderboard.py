@@ -11,6 +11,7 @@ class Player:
 
         
 class Node: 
+    
     def __init__(self, key, player):
         self.key = key
         self.player = player
@@ -22,6 +23,7 @@ class Node:
 # Node is the specific node in the tree during traversal (i.e. a player)
 
 class BST:
+    
     def __init__(self):
         self.root = None
 
@@ -48,4 +50,32 @@ class BST:
             else:
                 self.inserter(node.right, key, player)  # Continue through the newly added right node
 
+
+class Leaderboard:
+    # Manages all players and each statistic category
+
+    def __init__(self):
+        # Each stat becomes it's own BST 
+        self.pts_tree = BST()
+        self.ast_tree = BST()
+        self.reb_tree = BST()
+        self.stl_tree = BST()
+        self.blk_tree = BST()
+
+        self.players = {}                               # Dictionary for each players name for quick access
+
+
+    def add_player(self, name, pts, ast, reb, stl, blk):
+        # Insert all player stats into corresponding tree
+
+        player = Player(name, pts, ast, reb, stl, blk)
+
+        self.players[name] = player # Add players name into dictionary
+
+        # Player value inserted into each stat tree
+        self.pts_tree.insert(pts, player)
+        self.ast_tree.insert(ast, player)
+        self.reb_tree.insert(reb, player)
+        self.stl_tree.insert(stl, player)
+        self.blk_tree.insert(blk, player)
 
