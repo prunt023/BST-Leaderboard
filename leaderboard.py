@@ -137,6 +137,27 @@ class Leaderboard:
         self.blk_tree.insert(blk, player)
 
     
+    def delete_player(self, name):
+        # Remove a player from leaderboard and all stat BSTs
+
+        if name not in self.players:                    # Check that player still exists
+            print("Player not found (Names are case sensitive). ")
+            return
+        
+        player = self.players[name]
+
+        # Remove players from every stat tree
+        self.pts_tree.delete(player.points, player)     
+        self.ast_tree.delete(player.assists, player)
+        self.reb_tree.delete(player.rebounds, player)
+        self.stl_tree.delete(player.steals, player)
+        self.blk_tree.delete(player.blocks, player)
+
+        del self.players[name]                          # Remove player name from dictionary
+
+        print(f" {name} removed from leaderboard.")     
+        
+    
     def display_all_categories(self,  k):
         # Sets up display for player ranking in each category
 
@@ -296,6 +317,11 @@ for name, pts, ast, reb, stl, blk in given_players:
                 print(f" {p.name}: {player_stat}:")
 
         elif option == "4":
+            # Delete a player from leaderboard
+            name = input("\n Please enter player name to delete: ")
+            lb.delete_player(name)
+
+        elif option == "5":
             # Exit program 
             print("\n Exiting Leaderboard...")
             break 
