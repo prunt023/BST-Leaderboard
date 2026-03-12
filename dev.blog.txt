@@ -8,27 +8,24 @@ Step 1: Project Planning:
 3/8/26
 The goal of this project was to create an interactive NBA leaderboard that ranks players by their various statistics (points, assists, rebounds, steals, blocks). I chose to implement this project using Binary Search Trees for each statistic to allow for ranking and finding a range of players more efficiently, as well as a dictionary for player names for quick player lookup and deletion.
 
+Implementation:
+3/12/26
+
 Step 2: Player and Node Class:
-3/9/26
 The first step to implementing this structure was creating the player and node classes. The Player class stores all statistics into separated categories, while the Node class represents each individual node in the Binary Search Tree. Each node contains a key, or value for any given stat, a player (Each node in the tree is treated as a player) and the left and right leaf nodes (other players). With each stat categorized into a node, players can exist across each BST (statistic).
 
 Step 3: BST Insertion:
-3/9/26
 With the Node and Player classes created, I implemented the BST insertion algorithm, meant for adding players to each stat tree based on their statistic value. For example, if a player has 23 points, then in the points tree that player will be sorted into the tree with the value 23. This same logic continues for each statistic. Doing this ensures that the leaderboard can quickly return the top players of any category in a relatively quick manner.
 
 Step 4: Reverse In-Order Traversal:
-3/9/26
 Next, in order to display the leaderboard by ranking, I implemented a Reverse In-order algorithm. Regular traversal through a BST gives us the values in ascending order, but the reverse in-order returns the values from largest to smallest in each tree. This is how each player gets properly ranked on the leaderboard.
 
 Step 5: Range of Players:
-3/10/26
 As another option for the user, I implemented the ability to get players in a given range for any statistic. For example, requesting players with points between 10 and 20 will only return a list of players within that range for the points category. This was added using a recursive method that only travels down the parts of the tree that are within the range of values given. This improves time efficiency because the tree does not have to be scanned repeatedly for values within the range set.
 
 Step 6: Player Deletion:
-3/10/26
 One of the last stages was implementing an algorithm to delete a player across all BSTs. To do this, I retrieved the player object from the dictionary with every player name, then removed the player node from every tree. This node deletion also handles if the removed player node has a leaf node on either the right or left side, in addition to having both leaf nodes (replaces with next smallest node in succession). 
 
 Step 7: Interactive Menu:
-3/9/26 - 3/10/26
 The final stage of this project was creating an interactive menu for the users to work with. In this interface, There are 5 options: Add players, Display leaderboard, Select a stat range, Delete players, and Exit the leaderboard. In addition to these options, there are 10 pre-loaded players for the user to interact with, since an empty leaderboard is tedious to load continuously. Validation of inputs was also implemented to ensure that users are correctly entering valid inputs for player stats and menu options.
 
