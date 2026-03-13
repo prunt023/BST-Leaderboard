@@ -193,7 +193,7 @@ class Leaderboard:
         self.reverse_inOrder(node.left, result, k)      # Traverse through left subtree to fill k players if necessary
 
 
-   def range_of_players(self, tree, low, high):
+    def range_of_players(self, tree, low, high):
         # Return all players within a given range 
         result = []
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
         ("Nikola Jokic", 34, 8, 10, 2, 5)
     ]
     
-for name, pts, ast, reb, stl, blk in given_players:
+    for name, pts, ast, reb, stl, blk in given_players:
         lb.add_player(name, pts, ast, reb, stl, blk)
 
     def check_int(question):
